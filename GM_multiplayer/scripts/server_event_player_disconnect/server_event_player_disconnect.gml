@@ -12,12 +12,12 @@ function server_event_player_disconnect(map) {
 	ds_list_delete(socket_list, socketId);
 	
 	//Get Access + Remove from Map (No longer needed as i am disconnecting)
-	var struct = socket_info[? socket];
-	
-		show_debug_message(struct);
+	var struct = socket_get_client_info(socket);
+	show_debug_message(struct);
 	
 		//Delete Player Obj
-		instance_destroy(struct.instid);
+		var playerIndex = struct.instid;
+		instance_destroy(playerIndex);
 	
 	//Remove from memory
 	ds_map_delete(socket_info, socketId);

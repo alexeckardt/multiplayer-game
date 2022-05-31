@@ -21,18 +21,33 @@ function server_receive_packet(buffer, socket) {
 			var _y = buffer_read(buffer, buffer_u16);
 			
 			//Grab
-			var playerinst = socket_get_client_info(socket).instid;
+			var socketInfo = socket_get_client_info(socket);
+			print(string(socket) + ":" + string(socketInfo));
+			
+			var playerinst = socketInfo.instid;
 			playerinst.x = _x;
 			playerinst.y = _y;
 			
-			//Send Info Back
+			//
+			//
+			//Create the move buffer
 			buffer_seek(server_buffer, buffer_seek_start, 0);
 			buffer_write(server_buffer, buffer_u8, network.move);
+			buffer_write(server_buffer, buffer_u8, socket); //this is the moving player
 			buffer_write(server_buffer, buffer_u16, _x);
 			buffer_write(server_buffer, buffer_u16, _y);
-			network_send_buffer_to_socket(socket);
 			
-			//print("move " + string(socket) + "to position (" + string(_x) + ", " + string(_y) + ").");
+			//
+			//Send Info To All Players
+			var s = ds_list_size(socket_list);
+			for (var i = 0; i < s; i++) {
+				
+				//Get Socket
+				var _sock = socket_list[| i];
+
+				//Send to the sock
+				network_send_buffer_to_socket(_sock);
+			}
 			
 			break;
 	}

@@ -9,3 +9,9 @@ connected = -1; //0 means connected
 
 //Buffer
 client_buffer = buffer_create(1024, buffer_fixed, 1);
+
+//Identify Who's Who
+player_inst_mapping = ds_map_create();
+
+//Username connecting with
+username = "";
