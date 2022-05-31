@@ -9,5 +9,6 @@ enum network {
 	player_disonnect,
 	move,
 	chat,
+	close_server,
 	
 }

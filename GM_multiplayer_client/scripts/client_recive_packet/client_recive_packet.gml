@@ -51,6 +51,20 @@ function client_recive_packet(buffer) {
 			instMoving.y = _y;
 			
 			break;
+			
+		case network.close_server:
+		
+			//Disconnect
+			network_destroy(socket);
+			
+			//Create a New Client
+			instance_create_depth(x, y, depth, con_client);
+			
+			//Destroy
+			instance_destroy();
+			
+			break;
+			
 	}
 	
 	return 0;
