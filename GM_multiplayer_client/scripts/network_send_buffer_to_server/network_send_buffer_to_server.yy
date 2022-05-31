@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Meta",
-    "path": "folders/Scripts/Meta.yy",
+    "name": "Server",
+    "path": "folders/Server.yy",
   },
   "resourceVersion": "1.0",
-  "name": "print",
+  "name": "network_send_buffer_to_server",
   "tags": [],
   "resourceType": "GMScript",
 }

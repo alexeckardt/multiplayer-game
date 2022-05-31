@@ -10,5 +10,7 @@ network_create_server(network_socket_tcp, port, maxClients);
 bufferMb = 1;
 server_buffer = buffer_create(1024 * bufferMb, buffer_fixed, 1);
 
+
 //Players
 socketList = ds_list_create();
+socket_info = ds_map_create();

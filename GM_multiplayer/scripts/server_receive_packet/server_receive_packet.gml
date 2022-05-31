@@ -4,6 +4,9 @@
 //
 function server_receive_packet(buffer, socket) {
 
+	//Go To the start of the buffer
+	buffer_seek(buffer, buffer_seek_start, 0);
+
 	//Get Custom Message id
 	var msgid = buffer_read(buffer, buffer_u8);
 	
@@ -11,15 +14,21 @@ function server_receive_packet(buffer, socket) {
 	switch (msgid) {
 		
 		//Hello World
-		case 1: 
-			//
-			var msg = buffer_read(buffer, buffer_string);
-			
+		case network.move:
+		
+			//Get Info
+			var _x = buffer_read(buffer, buffer_u16);
+			var _y = buffer_read(buffer, buffer_u16);
+
+			//Send Info Back
 			buffer_seek(server_buffer, buffer_seek_start, 0);
-			buffer_write(server_buffer, buffer_u8, 1);
-			buffer_write(server_buffer, buffer_string, msg + "123");
+			buffer_write(server_buffer, buffer_u8, network.move);
+			buffer_write(server_buffer, buffer_u16, _x);
+			buffer_write(server_buffer, buffer_u16, _y);
+			network_send_buffer_to_socket(socket);
 			
-			network_send_packet(socket, server_buffer, buffer_tell(server_buffer));
+			//print("move " + string(socket) + "to position (" + string(_x) + ", " + string(_y) + ").");
+			
 			break;
 	}
 
