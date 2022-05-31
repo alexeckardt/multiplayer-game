@@ -55,13 +55,22 @@ function client_recive_packet(buffer) {
 		case network.close_server:
 		
 			//Disconnect
-			network_destroy(socket);
+			network_destroy(client);
 			
 			//Create a New Client
 			instance_create_depth(x, y, depth, con_client);
 			
 			//Destroy
 			instance_destroy();
+			
+			break;
+			
+		case network.player_disconnect:
+		
+			//Delete
+			var _socket = buffer_read(buffer, buffer_u8);
+			var instToRemove = player_inst_mapping[? _socket];
+			instance_destroy(instToRemove);
 			
 			break;
 			

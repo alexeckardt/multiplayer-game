@@ -6,7 +6,7 @@ enum network {
 
 	player_connect,
 	player_joined,
-	player_disonnect,
+	player_disconnect,
 	move,
 	chat,
 	close_server,
