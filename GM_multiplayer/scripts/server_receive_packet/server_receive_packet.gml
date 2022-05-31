@@ -19,7 +19,12 @@ function server_receive_packet(buffer, socket) {
 			//Get Info
 			var _x = buffer_read(buffer, buffer_u16);
 			var _y = buffer_read(buffer, buffer_u16);
-
+			
+			//Grab
+			var playerinst = socket_get_client_info(socket).instid;
+			playerinst.x = _x;
+			playerinst.y = _y;
+			
 			//Send Info Back
 			buffer_seek(server_buffer, buffer_seek_start, 0);
 			buffer_write(server_buffer, buffer_u8, network.move);

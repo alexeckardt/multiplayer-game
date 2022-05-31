@@ -12,6 +12,17 @@ function client_recive_packet(buffer) {
 	
 	//Switch on Id
 	switch (msgid) {
+		case network.player_connect:
+			var _socket = buffer_read(buffer, buffer_u8);
+			var _x = buffer_read(buffer, buffer_u16);
+			var _y = buffer_read(buffer, buffer_u16);
+			
+			var instid = instance_create_depth(_x, _y, depth, oPlayer);
+			instid.socket = _socket;
+			
+			
+			break;
+			
 		case network.move:
 			var _x = buffer_read(buffer, buffer_u16);
 			var _y = buffer_read(buffer, buffer_u16);
