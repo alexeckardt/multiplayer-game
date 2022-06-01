@@ -3,7 +3,8 @@
 socket = -1;
 username = "";
 
-
+//
+//
 
 //
 //
@@ -11,7 +12,12 @@ username = "";
 
 hSpeed = 0;
 vSpeed = 0;
-walkSpeed = 1;
+walkSpeed = 1.5;
+
+xpos = x;
+ypos = y;
+xposLast = x;
+yposLast = y;
 
 //
 // Keys

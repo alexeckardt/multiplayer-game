@@ -15,18 +15,18 @@ hSpeed = walkSpeed*mx;
 vSpeed = walkSpeed*my;
 
 //Move
-x += hSpeed;
-y += vSpeed;
-
+xposLast = xpos;
+yposLast = ypos;
+xpos += hSpeed;
+ypos += vSpeed;
 
 //Update
-if (x != xprevious || y != yprevious) {
+if (xpos != xposLast || ypos != yposLast) {
 
 	//Send Position To Server
 	buffer_seek(buff, buffer_seek_start, 0);
 	buffer_write(buff, buffer_u8, network.move);
-	buffer_write(buff, buffer_u16, x);
-	buffer_write(buff, buffer_u16, y);
+	buffer_write(buff, buffer_u16, xpos);
+	buffer_write(buff, buffer_u16, ypos);
 	network_send_buffer_to_server();
-	
 }
