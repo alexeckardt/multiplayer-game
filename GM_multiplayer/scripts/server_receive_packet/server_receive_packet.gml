@@ -13,7 +13,6 @@ function server_receive_packet(buffer, socket) {
 	//Switch
 	switch (msgid) {
 		
-		//Hello World
 		case network.move:
 		
 			//Get Info
@@ -49,8 +48,9 @@ function server_receive_packet(buffer, socket) {
 				network_send_buffer_to_socket(_sock);
 			}
 			
-			break;
-			
+			break;		
+		//
+		//
 		case network.set_username:
 		
 			//Get the new userna,e
