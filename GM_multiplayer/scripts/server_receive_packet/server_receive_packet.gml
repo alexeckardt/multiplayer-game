@@ -50,6 +50,32 @@ function server_receive_packet(buffer, socket) {
 			}
 			
 			break;
+			
+		case network.set_username:
+		
+			//Get the new userna,e
+			var newUsername = buffer_read(buffer, buffer_string);
+		
+			//Update the map for future use
+			socket_info[? socket].username = newUsername;
+			
+			//Resend Updates to everyone back
+			buffer_seek(server_buffer, buffer_seek_start, 0);
+			buffer_write(server_buffer, buffer_u8, network.set_username);
+			buffer_write(server_buffer, buffer_u8, socket); //this is the moving player
+			buffer_write(server_buffer, buffer_string, newUsername);
+			
+			//
+			//Send Info To All Players
+			var s = ds_list_size(socket_list);
+			for (var i = 0; i < s; i++) {
+				
+				//Send Buffer to Socket
+				var _sock = socket_list[| i];
+				network_send_buffer_to_socket(_sock);
+			}
+		
+		break;
 	}
 
 	//All Good

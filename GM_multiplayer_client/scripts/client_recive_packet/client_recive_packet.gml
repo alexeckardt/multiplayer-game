@@ -19,7 +19,7 @@ function client_recive_packet(buffer) {
 			
 			var instid = instance_create_depth(_x, _y, depth, oPlayer);
 			instid.socket = _socket;
-			instid.username = _socket;
+			instid.username = username;
 			
 			//Save
 			player_inst_mapping[? _socket] = instid;
@@ -30,10 +30,11 @@ function client_recive_packet(buffer) {
 			var _socket = buffer_read(buffer, buffer_u8);
 			var _x = buffer_read(buffer, buffer_u16);
 			var _y = buffer_read(buffer, buffer_u16);
+			var _username = buffer_read(buffer, buffer_string);
 			
 			var instid = instance_create_depth(_x, _y, depth, oSlave);
 			instid.socket = _socket;
-			instid.username = _socket;
+			instid.username = _username;
 			
 			//Save
 			player_inst_mapping[? _socket] = instid;
@@ -65,12 +66,25 @@ function client_recive_packet(buffer) {
 			
 			break;
 			
+		//Disconnect
 		case network.player_disconnect:
 		
 			//Delete
 			var _socket = buffer_read(buffer, buffer_u8);
 			var instToRemove = player_inst_mapping[? _socket];
 			instance_destroy(instToRemove);
+			
+			break;
+			
+		//Update the Chars
+		case network.set_username:
+		
+			//Delete
+			var _socket = buffer_read(buffer, buffer_u8);
+			var _newusername = buffer_read(buffer, buffer_string);
+			var instToRename = player_inst_mapping[? _socket];
+			
+			instToRename.username = _newusername;
 			
 			break;
 			

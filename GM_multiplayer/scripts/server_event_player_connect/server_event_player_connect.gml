@@ -24,8 +24,6 @@ function server_event_player_connect(map) {
 	//Show
 	print("Added Socket ["+string(new_player_socket)+"]");
 	
-	
-	
 	//
 	//
 	//
@@ -54,6 +52,7 @@ function server_event_player_connect(map) {
 			//Write
 			var socketInfo = socket_get_client_info(_sock);
 			var _slave = socketInfo.instid;
+			var _slaveUsername = socketInfo.username;
 			
 			//Write and Send
 			buffer_seek(buff,buffer_seek_start, 0);
@@ -61,6 +60,7 @@ function server_event_player_connect(map) {
 			buffer_write(buff, buffer_u8, _sock);
 			buffer_write(buff, buffer_u16, _slave.x);
 			buffer_write(buff, buffer_u16, _slave.y);
+			buffer_write(buff, buffer_string, _slaveUsername);
 			network_send_buffer_to_socket(new_player_socket);
 			
 		}
@@ -84,6 +84,7 @@ function server_event_player_connect(map) {
 			buffer_write(buff, buffer_u8, new_player_socket);
 			buffer_write(buff, buffer_u16, playerinst.x);
 			buffer_write(buff, buffer_u16, playerinst.y);
+			buffer_write(buff, buffer_string, "");
 			network_send_buffer_to_socket(_sock);
 		}
 		
