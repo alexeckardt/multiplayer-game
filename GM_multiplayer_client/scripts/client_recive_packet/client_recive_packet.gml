@@ -23,6 +23,8 @@ function client_recive_packet(buffer) {
 			
 			//Save
 			player_inst_mapping[? _socket] = instid;
+		
+			Camera.target = instid;
 			
 			break;
 			

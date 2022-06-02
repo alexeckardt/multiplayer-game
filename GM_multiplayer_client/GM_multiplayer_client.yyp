@@ -11,6 +11,7 @@
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":0,},
     {"id":{"name":"enum_network","path":"scripts/enum_network/enum_network.yy",},"order":0,},
     {"id":{"name":"sSlave","path":"sprites/sSlave/sSlave.yy",},"order":1,},
+    {"id":{"name":"Camera","path":"objects/Camera/Camera.yy",},"order":2,},
     {"id":{"name":"client_get_client","path":"scripts/client_get_client/client_get_client.yy",},"order":4,},
     {"id":{"name":"rm_Client","path":"rooms/rm_Client/rm_Client.yy",},"order":0,},
   ],
